@@ -3,13 +3,17 @@
 # TAGS
 
 variable "Region" {
-  default = ""
+  default = "ME"
 }
 
 variable "env_short" {
-  default = ""
+  default = "P"
 }
 
 variable "appname" {
-  default = ""
+  default = "CMK"
+}
+
+variable "number" {
+  default = "01"
 }

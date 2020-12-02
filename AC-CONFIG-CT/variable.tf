@@ -1,3 +1,3 @@
-variable "logaccountbucket" {
+variable "logaccountdestination_bucket" {
     default = ""
 }

@@ -8,7 +8,7 @@ resource "aws_config_configuration_recorder" "ConfigurationRecorder" {
 }
 
 resource "aws_config_delivery_channel" "DeliveryChannel" {
-  s3_bucket_name = "${var.logaccountbucket}" # Log Account Bucket name
+  s3_bucket_name = "${var.logaccountdestination_bucket}" # Log Account Bucket name
   #s3_key_prefix  = "${var.s3_key_prefix}"
   depends_on = [ "aws_config_configuration_recorder.ConfigurationRecorder" ]
 }

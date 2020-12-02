@@ -1,3 +1,4 @@
+data "aws_region" "current" {}
 
 # SECURITY HUB
 # This will automatically generate a role in IAM with the default policy nothing to care about
@@ -22,7 +23,7 @@ resource "aws_guardduty_invite_accepter" "member" {
 
 # IAM ANALYZER
 resource "aws_accessanalyzer_analyzer" "example" {
-  analyzer_name = "${var.Region}-${var.env}--${var.appname}-${var.service}-IAM"
+  analyzer_name = "${var.Region}-${var.env_short}-${var.appname}-ANALYZER-IAM-${var.number}"
 }
 
 # CLOUDWATCH EVENT Trigger
@@ -62,7 +63,7 @@ PATTERN
 resource "aws_cloudwatch_event_target" "TargetForEventRule" {
   rule = "${aws_cloudwatch_event_rule.EventRule.name}"
   target_id = "target-id1"
-  arn = "arn:aws:events:me-south-1:${var.Audit_Account_No}:event-bus/default"
+  arn = "arn:aws:events:${data.aws_region.current.name}:${var.Audit_Account_No}:event-bus/default"
   role_arn = "${aws_iam_role.test_role.arn}"
 }
 
@@ -92,7 +93,7 @@ PATTERN
 resource "aws_cloudwatch_event_target" "TargetForEventRule2" {
   rule = "${aws_cloudwatch_event_rule.EventRule2.name}"
   target_id = "target-id2"
-  arn = "arn:aws:events:me-south-1:${var.Audit_Account_No}:event-bus/default"
+  arn = "arn:aws:events:${data.aws_region.current.name}:${var.Audit_Account_No}:event-bus/default"
   role_arn = "${aws_iam_role.test_role.arn}"
 }
 
@@ -122,7 +123,7 @@ PATTERN
 resource "aws_cloudwatch_event_target" "TargetForEventRule3" {
   rule = "${aws_cloudwatch_event_rule.EventRule3.name}"
   target_id = "target-id3"
-  arn = "arn:aws:events:me-south-1:${var.Audit_Account_No}:event-bus/default"
+  arn = "arn:aws:events:${data.aws_region.current.name}:${var.Audit_Account_No}:event-bus/default"
   role_arn = "${aws_iam_role.test_role.arn}"
 }
 
@@ -153,7 +154,7 @@ resource "aws_cloudwatch_event_target" "TargetForEventRule4" {
   rule = "${aws_cloudwatch_event_rule.EventRule4.name}"
   target_id = "target-id4"
   role_arn = "${aws_iam_role.test_role.arn}"
-  arn = "arn:aws:events:me-south-1:${var.Audit_Account_No}:event-bus/default"
+  arn = "arn:aws:events:${data.aws_region.current.name}:${var.Audit_Account_No}:event-bus/default"
 }
 
 ###############################
@@ -189,7 +190,7 @@ resource "aws_cloudwatch_event_target" "TargetForEventRule5" {
   rule = "${aws_cloudwatch_event_rule.EventRule5.name}"
   target_id = "target-id5"
   role_arn = "${aws_iam_role.test_role.arn}"
-  arn = "arn:aws:events:me-south-1:${var.Audit_Account_No}:event-bus/default"
+  arn = "arn:aws:events:${data.aws_region.current.name}:${var.Audit_Account_No}:event-bus/default"
 }
 
 ###############################
@@ -237,7 +238,7 @@ resource "aws_cloudwatch_event_target" "TargetForEventRule6" {
   rule = "${aws_cloudwatch_event_rule.EventRule6.name}"
   target_id = "target-id6"
   role_arn = "${aws_iam_role.test_role.arn}"
-  arn = "arn:aws:events:me-south-1:${var.Audit_Account_No}:event-bus/default"
+  arn = "arn:aws:events:${data.aws_region.current.name}:${var.Audit_Account_No}:event-bus/default"
 }
 
 ###############################
@@ -267,7 +268,7 @@ resource "aws_cloudwatch_event_target" "TargetForEventRule7" {
   rule = "${aws_cloudwatch_event_rule.EventRule7.name}"
     target_id = "target-id7"
   role_arn = "${aws_iam_role.test_role.arn}"
-  arn = "arn:aws:events:me-south-1:${var.Audit_Account_No}:event-bus/default"
+  arn = "arn:aws:events:${data.aws_region.current.name}:${var.Audit_Account_No}:event-bus/default"
 }
 
 
@@ -308,13 +309,13 @@ resource "aws_cloudwatch_event_target" "TargetForEventRule8" {
   rule = "${aws_cloudwatch_event_rule.EventRule8.name}"
   target_id = "target-id8"
   role_arn = "${aws_iam_role.test_role.arn}"
-  arn = "arn:aws:events:me-south-1:${var.Audit_Account_No}:event-bus/default"
+  arn = "arn:aws:events:${data.aws_region.current.name}:${var.Audit_Account_No}:event-bus/default"
 }
 
 
 ##### Iam Role for cloudwatch
 resource "aws_iam_role" "test_role" {
-  name = "${var.Region}-${var.env}-${var.service}-IAM"
+  name = "${var.Region}-${var.env_short}-${var.appname}-IAMROLE-${var.number}"
 
   assume_role_policy = <<EOF
 {
@@ -336,7 +337,7 @@ EOF
 ## Policy for cloudwatch event
 
 resource "aws_iam_role_policy" "test_policy" {
-  name = "${var.Region}-${var.env_short}-${var.appname}-${var.service}-POLICY"
+  name = "${var.Region}-${var.env_short}-${var.appname}-IAMPOLICY-${var.number}"
   role = "${aws_iam_role.test_role.id}"
 
   policy = <<-EOF
@@ -349,7 +350,7 @@ resource "aws_iam_role_policy" "test_policy" {
                 "events:PutEvents"
             ],
             "Resource": [
-                "arn:aws:events:me-south-1:${var.Audit_Account_No}:event-bus/default"
+                "arn:aws:events:${data.aws_region.current.name}:${var.Audit_Account_No}:event-bus/default"
             ]
         }
     ]
