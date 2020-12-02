@@ -7,7 +7,7 @@ data "aws_region" "current" {}
 
 
 resource "aws_cloudtrail" "foobar" {
-  name                          = "${var.Region}-${var.env_short}-${var.appname}-${var.service}"
+  name                          = "${var.Region}-${var.env_short}-${var.appname}-CLOUDTRAIL-${var.number}"
   s3_bucket_name                = "${var.logaccountdestination_bucket}"
   #s3_key_prefix                 = "CloutrailLogs"
   include_global_service_events = true
@@ -48,7 +48,7 @@ EOF
 ################################
 
 resource "aws_cloudwatch_log_group" "cw" {
-  name = "${var.Region}-${var.env_short}-${var.appname}-CLOUDWATCH-LOGGROUP"
+  name = "${var.Region}-${var.env_short}-${var.appname}-CLOUDWATCH-LOGGROUP-${var.number}"
 }
 
 

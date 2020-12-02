@@ -14,20 +14,20 @@ variable "appname" {
   default = "NS"
 }
 
-variable "service" {
-  default = "CT"
-}
+# variable "service" {
+#   default = "CT"
+# }
 
+variable "number" {
+  default = "01"
+}
 
 ## Resource name
 
 variable "snstopicname" {
-    default = "ME-P-NS-SNS"
+    default = "ME-P-NS-SNS-01"
 }
 
-variable "cloudwatch_loggroup_name" {
-    default = ""
-}
 
 variable "logaccountdestination_bucket" {
   default = ""
