@@ -3,26 +3,26 @@
 # TAGS
 
 variable "Region" {
-  default = ""
+  default = "ME"
 }
 
 variable "env_short" {
-  default = ""
+  default = "P"
 }
 
 variable "appname" {
-  default = ""
+  default = "NS"
 }
 
 variable "service" {
-  default = ""
+  default = "CT"
 }
 
 
 ## Resource name
 
 variable "snstopicname" {
-    default = ""
+    default = "ME-P-NS-SNS"
 }
 
 variable "cloudwatch_loggroup_name" {
