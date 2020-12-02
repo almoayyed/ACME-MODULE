@@ -28,3 +28,7 @@ variable "snstopicname" {
 variable "cloudwatch_loggroup_name" {
     default = ""
 }
+
+variable "logaccountdestination_bucket" {
+  default = ""
+}
