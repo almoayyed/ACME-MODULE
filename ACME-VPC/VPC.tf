@@ -162,7 +162,7 @@ resource "aws_route_table" "private" {
     Name               = "${var.Region}-${var.env}-RT-AP${element(var.az-tag, count.index)}"
     Environment        = "${var.Environment}"
     Owner              = "${var.Owner}"
-    CostCenter         = "${var.CostCenter}"
+    
     Description        = "${var.Environment} Environment Application Subnet RouteTable"
   }
 }
@@ -203,7 +203,7 @@ resource "aws_route_table" "service" {
     Name               = "${var.Region}-${var.env}-RT-SR${element(var.az-tag, count.index)}"
     Environment        = "${var.Environment}"
     Owner              = "${var.Owner}"
-    CostCenter         = "${var.CostCenter}"
+
     Description        = "${var.Environment} Environment Service Subnet RouteTable"
 }
 }
@@ -244,7 +244,7 @@ resource "aws_route_table" "db" {
     Name               = "${var.Region}-${var.env}-RT-DB${element(var.az-tag, count.index)}"
     Environment        = "${var.Environment}"
     Owner              = "${var.Owner}"
-    CostCenter         = "${var.CostCenter}"
+
     Description        = "${var.Environment} Environment Database Subnet RouteTable"
   }
 }
