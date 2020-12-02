@@ -6,7 +6,7 @@ data "aws_region" "current" {}
 ########################
 
 
-resource "aws_cloudtrail" "foobar" {
+resource "aws_cloudtrail" "AC" {
   name                          = "${var.Region}-${var.env_short}-${var.appname}-CLOUDTRAIL-${var.number}"
   s3_bucket_name                = "${var.logaccountdestination_bucket}"
   #s3_key_prefix                 = "CloutrailLogs"
