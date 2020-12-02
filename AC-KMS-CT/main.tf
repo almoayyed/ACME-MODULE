@@ -25,7 +25,7 @@ POLICY
 
 
 resource "aws_kms_alias" "a" {
-  name          = "alias/${var.Region}-${var.env_short}-${var.appname}-KMS-${var.number}"
+  name          = "alias/${var.Region}-${var.env_short}-${var.appname}-CMK-${var.number}"
   target_key_id = "${aws_kms_key.KmsKey.key_id}"
 }
 

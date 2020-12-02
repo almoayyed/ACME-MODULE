@@ -3,19 +3,23 @@
 # TAGS
 
 variable "Region" {
-  default = ""
+  default = "ME"
 }
 
 variable "env_short" {
-  default = ""
+  default = "P"
 }
 
 variable "appname" {
-  default = ""
+  default = "CT"
 }
 
-variable "service" {
-  default = ""
+# variable "service" {
+#   default = ""
+# }
+
+variable "number" {
+  default = "01"
 }
 
 

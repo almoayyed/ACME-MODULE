@@ -11,7 +11,7 @@ variable "env_short" {
 }
 
 variable "appname" {
-  default = "NS"
+  default = "CT"
 }
 
 # variable "service" {
@@ -25,7 +25,7 @@ variable "number" {
 ## Resource name
 
 variable "snstopicname" {
-    default = "ME-P-NS-SNS-01"
+    default = "ME-P-CLOUDTRAIL-SNS-01"
 }
 
 

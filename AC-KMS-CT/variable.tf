@@ -11,7 +11,7 @@ variable "env_short" {
 }
 
 variable "appname" {
-  default = "CMK"
+  default = "CT"
 }
 
 variable "number" {
