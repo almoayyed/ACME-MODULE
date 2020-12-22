@@ -65,25 +65,28 @@ module "ACME-RDS" {
 
 ```
 module "ACME-EC2" {
-    source = "../ACME-EC2" 
+    source = "github.com/almoayyed/ACME-MODULE/ACME-EC2" 
     
+    # Compute
     ami_type         = "custom" # custom or nocustom ami
     amid             = "ami-0ce1e3f77cd41957e" # If Custom AMI entry the ami ID else leave it blank
     instance_type    = "t3.small"
     key_name         = "ACME-JIRA"
     
-    # VOLUME Attribute
+    # Storage
     volume_type      = "gp2"
     volume_size      = "30"
     delete_on_termination = "true"
     encrypted        = "true"
+    kmsname           = "IR-P-KMS-K-04"
     
+    # Network
     sourceportconnect = "22" # 22 OR 3389
     SourceAddressEC2connect-1 = "10.0.0.0/16" #(Source Address to connect EC2)
     SourceAddressEC2connect-2 = "172.0.0.0/16"
     APPVpcName        = "Main_VPC"
     APPSubnet01Name   = "ACME_SUBNET_W01_T_MM"
-    kmsname           = "IR-P-KMS-K-04"
+    
 ```
 
 
