@@ -63,6 +63,7 @@ module "ACME-RDS" {
 }
 ```
 
+## ACME Generic EC2
 ```
 module "ACME-EC2" {
     source = "github.com/almoayyed/ACME-MODULE/ACME-EC2" 
