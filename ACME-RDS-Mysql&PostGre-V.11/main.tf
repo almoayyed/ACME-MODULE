@@ -4,7 +4,7 @@ resource "aws_db_instance" "acme" {
   allocated_storage       = "${var.rds_allocated_storage}"
   engine                  = "${var.rds_engine_type}"
   engine_version          = "${var.rds_engine_version}"
-  enabled_cloudwatch_logs_exports =["postgresql"] #["error","general","slowquery"]
+  enabled_cloudwatch_logs_exports =["${var.cloudwatch_logs_exports}"] #["error","general","slowquery"]
   instance_class          = "${var.rds_instance_class}"
   name                    = "${var.database_name}"
   username                = "${var.database_user}"
