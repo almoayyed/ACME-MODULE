@@ -16,13 +16,14 @@ In order to use this module clone the repository on your local system
 ## ACME Generic RDS - ACME-RDS-Mysql&PostGre-V.11
 ```
 module "ACME-RDS" {
-    source = "../ACME-RDS-Mysql&PostGre-V.11" 
+    source = "github.com/almoayyed/ACME-MODULE/ACME-RDS-Mysql&PostGre-V.11" 
     
     kmsname = "abcd" #(KMS name to encrypt the RDS)
     DBVpcName = "Main_VPC"  #(VPC Name of RDS)
     DBSubnet01Name = "ACME_SUBNET_W01_T_MM" #(RDS Subnet group)
     DBSubnet02Name = "ACME_SUBNET_W02_T_MM" #(RDS Subnet group)
     SourceAddressRdsSG = "10.56.0.0/16"     #(Source Address for accessing RDS)
+    database_identifier = "bc-prod01-postgresql-01" # KEEP it small letter
     database_master_password = ""
     rds_engine_type  = "postgres" # "mysql"
     rds_engine_version = "12.3" 
@@ -40,13 +41,14 @@ module "ACME-RDS" {
 ## ACME Generic RDS - ACME-RDS-Mysql&PostGre-V.12
 ```
 module "ACME-RDS" {
-    source = "../ACME-RDS-Mysql&PostGre-V.12" 
+    source = "github.com/almoayyed/ACME-MODULE/ACME-RDS-Mysql&PostGre-V.12"
     
     kmsname = "abcd" #(KMS name to encrypt the RDS)
     DBVpcName = "Main_VPC"  #(VPC Name of RDS)
     DBSubnet01Name = "ACME_SUBNET_W01_T_MM" #(RDS Subnet group)
     DBSubnet02Name = "ACME_SUBNET_W02_T_MM" #(RDS Subnet group)
     SourceAddressRdsSG = "10.56.0.0/16"     #(Source Address for accessing RDS)
+    database_identifier = "bc-prod01-postgresql-01" # KEEP it small letter
     database_master_password = ""
     rds_engine_type  = "postgres" # "mysql"
     rds_engine_version = "12.3" 
@@ -60,3 +62,28 @@ module "ACME-RDS" {
     parameter_group_name = "default.postgres12" # "default.mysql8.0"
 }
 ```
+
+```
+module "ACME-EC2" {
+    source = "../ACME-EC2" 
+    
+    ami_type         = "custom" # custom or nocustom ami
+    amid             = "ami-0ce1e3f77cd41957e" # If Custom AMI entry the ami ID else leave it blank
+    instance_type    = "t3.small"
+    key_name         = "ACME-JIRA"
+    
+    # VOLUME Attribute
+    volume_type      = "gp2"
+    volume_size      = "30"
+    delete_on_termination = "true"
+    encrypted        = "true"
+    
+    sourceportconnect = "22" # 22 OR 3389
+    SourceAddressEC2connect-1 = "10.0.0.0/16" #(Source Address to connect EC2)
+    SourceAddressEC2connect-2 = "172.0.0.0/16"
+    APPVpcName        = "Main_VPC"
+    APPSubnet01Name   = "ACME_SUBNET_W01_T_MM"
+    kmsname           = "IR-P-KMS-K-04"
+```
+
+
