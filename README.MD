@@ -11,25 +11,52 @@ In order to use this module clone the repository on your local system
 # Pre-Requisites
 * Runtime: HCL, Terraform version 11.4
 * Role with permissions to log to access the AWS Environment
-* Memory: 128MB
-* Timeout: 10 seconds
 
-When creating the Terraform function, select Edit code inline and use the *Addtag.py*
 
-For the IAM role select create a custom role and then on the role creation page select Create a new IAM Role with name lambda_ec2_tagging and update the policy document with this policy:
+## ACME Generic RDS - ACME-RDS-Mysql&PostGre-V.11
+```
+module "ACME-RDS" {
+    source = "../ACME-RDS-Mysql&PostGre-V.11" 
+    
+    kmsname = "abcd" #(KMS name to encrypt the RDS)
+    DBVpcName = "Main_VPC"  #(VPC Name of RDS)
+    DBSubnet01Name = "ACME_SUBNET_W01_T_MM" #(RDS Subnet group)
+    DBSubnet02Name = "ACME_SUBNET_W02_T_MM" #(RDS Subnet group)
+    SourceAddressRdsSG = "10.56.0.0/16"     #(Source Address for accessing RDS)
+    database_master_password = ""
+    rds_engine_type  = "postgres" # "mysql"
+    rds_engine_version = "12.3" 
+    cloudwatch_logs_exports = "postgresql" # FOR POSTRGRE - [postgresql], FOR MYSQL- ["error","general","slowquery"]
+    rds_instance_class = "db.m5.large"
+    database_name      = ""
+    database_user      = ""
+    rds_is_multi_az    = "false" #(True in PROD)
+    publicly_accessible = "false"
+    database_port      = "5432" #3306
+    parameter_group_name = "default.postgres12" # "default.mysql8.0"
+}
+```
 
-Then complete the creation of the function and go to the CloudWatch Events console, this can be located in the CloudWatch console under Events -> Rules and the steps are:
-1.	Select Create Rule
-2.	Select Build event pattern to match events by service
-3.	Service Name: EC2
-4.	Event Type: AWS API Call via CloudTrail
-5.	Select Specific operation(s)
-6.	Select CreateTags
-7.	Select Add target
-8.	Select Lambda function
-9.	Function: tag_ec2_dependencies (or the name of the function if you used a different name)
-10.	We leave version alias and input in their default values
-11.	Select Configure details
-12.	Give a name to the rule: tag_ec2_dependencies
-13.	Add a description
-14.	State: enabled
+## ACME Generic RDS - ACME-RDS-Mysql&PostGre-V.12
+```
+module "ACME-RDS" {
+    source = "../ACME-RDS-Mysql&PostGre-V.12" 
+    
+    kmsname = "abcd" #(KMS name to encrypt the RDS)
+    DBVpcName = "Main_VPC"  #(VPC Name of RDS)
+    DBSubnet01Name = "ACME_SUBNET_W01_T_MM" #(RDS Subnet group)
+    DBSubnet02Name = "ACME_SUBNET_W02_T_MM" #(RDS Subnet group)
+    SourceAddressRdsSG = "10.56.0.0/16"     #(Source Address for accessing RDS)
+    database_master_password = ""
+    rds_engine_type  = "postgres" # "mysql"
+    rds_engine_version = "12.3" 
+    cloudwatch_logs_exports = "postgresql" # FOR POSTRGRE - [postgresql], FOR MYSQL- ["error","general","slowquery"]
+    rds_instance_class = "db.m5.large"
+    database_name      = ""
+    database_user      = ""
+    rds_is_multi_az    = "false" #(True in PROD)
+    publicly_accessible = "false"
+    database_port      = "5432" #3306
+    parameter_group_name = "default.postgres12" # "default.mysql8.0"
+}
+```
