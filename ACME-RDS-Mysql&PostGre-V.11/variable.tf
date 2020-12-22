@@ -9,9 +9,7 @@ variable "rds_allocated_storage" {
 
 }
 
-variable "cloudwatch_logs_exports" {
-  default = ""
-}
+
 variable "rds_engine_type" {
   description = "Database engine type"
   default     = "postgres" #"mysql"
