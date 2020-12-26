@@ -2,8 +2,10 @@
 How to use a ACME TERRAFORM Module to DEPLOY the AWS Resource.
 
 # Short Description
-ACME TF Module is a generic module for all AWS infra service. It is build with all the best practises.
-User can import the module and change the certain value to lauch the respective services
+ACME-Modules:
+Contains modules which are to be used for creating any AWS services instead of directly calling terraform resource function. Their can be specific cases (e.g: When adding Security Group Rules) when we can directly call terraform resource function, but for most of services its preferred to use modules when creating/using new AWS services under any accounts. If module is not present for any AWS service, contact AWS Landing Zone team to create a module which can be call'd from Workspace / Application terraform template.
+
+Modules present for : VPC, EC2, S3, RDS, IAM, ELB, ASG, Lambda, Cloudfront, API Gateway
 
 # Resolution
 In order to use this module clone the repository on your local system 
@@ -100,3 +102,50 @@ module "ACME-EC2" {
 ```
 
 
+## ACME Generic Security Group
+```
+module "ACME-SG" {
+    source = "github.com/almoayyed/ACME-MODULE/ACME-SG"
+    
+    APPVpcName = "Main_VPC"
+}
+
+resource "aws_security_group_rule" "allow_https" {
+  type            = "ingress"
+  from_port       = 443
+  to_port         = 443
+  protocol        = "tcp"
+  cidr_blocks     =["0.0.0.0/0"]
+  security_group_id = "${module.ACME-SG.sg_id}"
+}
+
+
+resource "aws_security_group_rule" "allow_mysql" {
+  type            = "ingress"
+  from_port       = 3306
+  to_port         = 3306
+  protocol        = "tcp"
+  cidr_blocks     =["0.0.0.0/0"]
+  security_group_id = "${module.ACME-SG.sg_id}"
+}
+
+resource "aws_security_group_rule" "allow_outbound" {
+  type            = "egress"
+  from_port       = 0
+  to_port         = 0
+  protocol        = "-1"
+  cidr_blocks     =["0.0.0.0/0"]
+  security_group_id = "${module.ACME-SG.sg_id}"
+}
+
+```
+
+## ACME Generic S3 bucket
+```
+module "ACME-S3" {
+    source = "github.com/almoayyed/ACME-MODULE/ACME-S3"
+    
+    bucket_name = ""
+    
+}
+```
