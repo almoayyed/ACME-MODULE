@@ -89,6 +89,14 @@ module "ACME-EC2" {
     APPVpcName        = "Main_VPC" 
     APPSubnet01Name   = "ACME_SUBNET_W01_T_MM"
     
+    # Tags
+    Region            = "ME"
+    env_short         = "P"
+    appname           = "CT"
+    number            = "01"
+    environment       = "PROD"
+}
+
 ```
 
 
