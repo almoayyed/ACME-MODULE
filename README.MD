@@ -149,3 +149,30 @@ module "ACME-S3" {
     
 }
 ```
+
+## ACME Generic ALB
+
+```
+module "ACME-ALB" {
+    source = "github.com/almoayyed/ACME-MODULE/ACME-ALB"
+    
+    APPVpcName = "Main_VPC"
+    APPSubnet01Name = "ACME_SUBNET_W01_T_MM"
+    APPSubnet02Name = "ACME_SUBNET_W02_T_MM"
+    
+    # ALB
+    internal     = "true"
+    tgport       = "80"
+    tgprotocol   = "HTTP"
+    heathcheck_path = "/index.html"
+    lisport      = "80"
+    lisprotocol  = "HTTP"
+    
+    # Tags
+    Region            = "ME"
+    env_short         = "P"
+    appname           = "CT"
+    number            = "01"
+    environment       = "PROD"
+}
+```
