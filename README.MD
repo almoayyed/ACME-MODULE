@@ -101,6 +101,44 @@ module "ACME-EC2" {
 
 ```
 
+## ACME Generic EC2 Instance with BootStrap
+```
+module "ACME-EC2" {
+    source = "github.com/almoayyed/ACME-MODULE/ACME-EC2" 
+    
+    # Compute
+    ami_type         = "nocustom" # custom or nocustom ami
+    amid             = "" # For *custom AMI enter the ami ID or else leave it blank
+    instance_type    = "t3.small"
+    key_name         = "ACME-JIRA"
+    ami              = ""  # REDHAT [redhat7, redhat6, redhat8], UBUNTU [ubuntu16, ubuntu18, ubuntu20], WINDOWS [windows2016, windows2019], AMAZON AMI [awsami]
+    
+    # Storage
+    volume_type      = "gp2"
+    volume_size      = "30"
+    delete_on_termination = "true"
+    encrypted        = "true"
+    kmsname           = "IR-P-KMS-K-04"
+    
+    # Network
+    sourceportconnect = "22" # 22 OR 3389
+    SourceAddressEC2connect-1 = "10.0.0.0/16" #(Source1 Address to connect EC2)
+    SourceAddressEC2connect-2 = "172.0.0.0/16" #(Source2 Address to connect EC2)
+    APPVpcName        = "Main_VPC" 
+    APPSubnet01Name   = "ACME_SUBNET_W01_T_MM"
+    
+    # Tags
+    Region            = "ME"
+    env_short         = "P"
+    appname           = "CT"
+    number            = "01"
+    environment       = "PROD"
+    
+    # BootStrap
+    user_data         = ""
+}
+
+```
 
 ## ACME Generic Security Group
 ```
@@ -154,7 +192,7 @@ module "ACME-S3" {
 
 ```
 module "ACME-ALB" {
-    source = "github.com/almoayyed/ACME-MODULE/ACME-ALB"
+    source = "github.com/almoayyed/ACME-Monitoring/ACME-ALB"
     
     APPVpcName = "Main_VPC"
     APPSubnet01Name = "ACME_SUBNET_W01_T_MM"
@@ -176,3 +214,4 @@ module "ACME-ALB" {
     environment       = "PROD"
 }
 ```
+
